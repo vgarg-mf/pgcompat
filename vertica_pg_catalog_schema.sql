@@ -1,6 +1,7 @@
+DROP SCHEMA IF EXISTS pg_catalog CASCADE;
+
 CREATE SCHEMA pg_catalog;
 
-drop view pg_catalog.pg_namespace;
 CREATE VIEW pg_catalog.pg_namespace AS
 SELECT
     schema_id AS oid,
@@ -8,7 +9,6 @@ SELECT
 FROM v_catalog.schemata;
 
 
-DROP VIEW pg_catalog.pg_class;
 CREATE VIEW pg_catalog.pg_class AS
 SELECT
     table_id AS oid,
@@ -27,7 +27,6 @@ SELECT
 FROM v_catalog.views;
 
 
-drop view pg_catalog.pg_attribute;
 CREATE VIEW pg_catalog.pg_attribute AS
 SELECT
     table_id AS attrelid,
@@ -39,8 +38,6 @@ SELECT
     NOT is_nullable AS attnotnull
 FROM v_catalog.columns;
 
-
-drop VIEW pg_catalog.pg_type;
 
 CREATE VIEW pg_catalog.pg_type AS
 SELECT
@@ -55,8 +52,6 @@ FROM (
 
 
 
-drop VIEW pg_catalog.pg_description;
-
 CREATE VIEW pg_catalog.pg_description AS
 SELECT
     CAST(NULL AS INT) AS objoid,
@@ -64,8 +59,6 @@ SELECT
     CAST(NULL AS VARCHAR(65000)) AS description
 WHERE 1 = 0;
 
-
-drop VIEW pg_catalog.pg_constraint;
 
 CREATE VIEW pg_catalog.pg_constraint AS
 SELECT
@@ -81,9 +74,6 @@ JOIN v_catalog.columns c
     AND c.column_name = cc.column_name
 WHERE tc.constraint_type = 'p';
 
-
-
-DROP VIEW pg_catalog.pg_matviews;
 
 CREATE VIEW pg_catalog.pg_matviews AS
 SELECT
