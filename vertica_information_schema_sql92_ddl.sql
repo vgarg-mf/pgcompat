@@ -4,6 +4,9 @@ DROP SCHEMA IF EXISTS INFORMATION_SCHEMA CASCADE;
 CREATE SCHEMA information_schema;
 -- 21.2.2, 21.2.3 - Vertica only supports one catalog per database, which we'll call "DEFAULT" here, but TODO, this will change with namespace support
 -- 21.2.4 SCHEMATA
+
+GRANT USAGE ON SCHEMA INFORMATION_SCHEMA TO PUBLIC;
+
 CREATE VIEW INFORMATION_SCHEMA.SCHEMATA
               AS SELECT
                   'DEFAULT' AS CATALOG_NAME, SCHEMA_NAME, SCHEMA_OWNER,
