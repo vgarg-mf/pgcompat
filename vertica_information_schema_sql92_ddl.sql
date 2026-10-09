@@ -121,10 +121,6 @@ SELECT
     'VIEW' AS table_type
 FROM v_catalog.views;
 
-GRANT SELECT ON information_schema.tables TO PUBLIC;
-
-
-drop VIEW information_schema.routines;
 CREATE VIEW information_schema.routines AS
 SELECT
     'DEFAULT' AS specific_catalog,
