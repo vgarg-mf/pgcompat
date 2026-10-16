@@ -1,4 +1,4 @@
-CREATE VIEW pg_catalog.pg_constraint_sigma_candidate AS
+CREATE OR REPLACE VIEW pg_catalog.pg_constraint_sigma_candidate AS
 WITH key_positions AS (
     SELECT constraint_id, column_name, ordinal_position
     FROM v_catalog.primary_keys
@@ -62,3 +62,14 @@ LEFT JOIN pg_catalog.pg_class AS target_class
   ON target_class.oid = candidate.confrelid
 WHERE source_class.oid IS NULL
    OR (candidate.contype = 'f' AND target_class.oid IS NULL);
+
+
+CREATE OR REPLACE VIEW pg_catalog.pg_constraint AS
+SELECT connamespace, conrelid, conkey, contype,
+       confrelid, confkey, conname
+FROM pg_catalog.pg_constraint_sigma_candidate;
+
+CREATE OR REPLACE VIEW public.pg_constraint AS
+SELECT connamespace, conrelid, conkey, contype,
+       confrelid, confkey, conname
+FROM pg_catalog.pg_constraint_sigma_candidate;
